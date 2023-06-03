@@ -6,6 +6,10 @@ while (wantsToPlay){
         alert("That's not an option! >:("); 
         playerChoice = getPlayerChoice(); 
     }
+    playRound(playerChoice, computerChoice); 
+}
+
+function playRound(playerChoice, computerChoice){
     if (playerChoice === computerChoice){
         alert(`${playerChoice} vs. ${computerChoice}. It's a tie!`); 
     } else {
@@ -16,7 +20,6 @@ while (wantsToPlay){
             alert(`${playerChoice} loses to ${computerChoice}... you lost! :(`); 
         }
     }
-    
 }
 
 

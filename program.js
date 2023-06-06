@@ -1,4 +1,4 @@
-game(); 
+// game(); 
 
 function game(){
     let rounds = 0; 
@@ -25,7 +25,7 @@ function game(){
 
 function playRound(playerChoice, computerChoice){
     if (playerChoice === computerChoice){
-        alert(`${playerChoice} vs. ${computerChoice}. It's a tie!`); 
+        alert(`${playerChoice} vs. ${computerChoice}. It's a tie!`);
     } else {
         let playerWon = determineWin(playerChoice, computerChoice); 
         if (playerWon){

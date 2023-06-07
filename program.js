@@ -13,39 +13,45 @@ const dimmer = document.querySelector('.dimmer');
 
 let wins = 0; 
 let losses = 0; 
+initiateChoiceButtonFunctionalities(); 
 
-for (let i = 0; i < choiceButtons.length; i++){
-    choiceButtons[i].addEventListener('click', () => {
-        disableChoiceButtons(true); 
-        const playerChoice = choiceButtons[i].getAttribute('data-choice');  
-        updateModel(playerModel, playerChoice); 
-        statusText.textContent = `You chose ${playerChoice}`;
+function initiateChoiceButtonFunctionalities(){
+    for (let i = 0; i < choiceButtons.length; i++){
+        choiceButtons[i].addEventListener('click', () => {
+            disableChoiceButtons(true); 
+            const playerChoice = choiceButtons[i].getAttribute('data-choice');  
+            playRound(playerChoice);             
+        })
+    }
+}
 
-        const enemyChoice = getComputerChoice(); 
+function playRound(playerChoice){
+    updateModel(playerModel, playerChoice); 
+    statusText.textContent = `You chose ${playerChoice}`;
+
+    const enemyChoice = getComputerChoice(); 
+    setTimeout(() => {
+        updateModel(enemyModel, enemyChoice); 
+        statusText.textContent = `Enemy chose ${enemyChoice}`; 
         setTimeout(() => {
-            updateModel(enemyModel, enemyChoice); 
-            statusText.textContent = `Enemy chose ${enemyChoice}`; 
+            updateStatsAndDisplayForWinner(playerChoice, enemyChoice); 
+            updateStatsTracker(); 
             setTimeout(() => {
-                updateStatsAndDisplayForWinner(playerChoice, enemyChoice); 
-                updateStatsTracker(); 
-                setTimeout(() => {
-                   playerModel.classList.remove(playerChoice); 
-                   playerModel.textContent = "?"; 
-                   enemyModel.classList.remove(enemyChoice); 
-                   enemyModel.textContent = "?"; 
-                   statusText.textContent = "Rock, Paper, or Scissors?"; 
-                   comparator.textContent = "vs."; 
+            playerModel.classList.remove(playerChoice); 
+            playerModel.textContent = "?"; 
+            enemyModel.classList.remove(enemyChoice); 
+            enemyModel.textContent = "?"; 
+            statusText.textContent = "Rock, Paper, or Scissors?"; 
+            comparator.textContent = "vs."; 
 
-                   if (wins === 5 || losses === 5){
-                    activateGameOverScene();                   
-                   } else {
-                    disableChoiceButtons(false); 
-                   }
-                }, 1000)
-            }, 800)
-        }, 500)        
-
-    })
+            if (wins === 5 || losses === 5){
+                activateGameOverScene();                   
+            } else {
+                disableChoiceButtons(false); 
+            }
+            }, 1000);
+        }, 800);
+    }, 500);
 }
 
 function activateGameOverScene(){
@@ -95,61 +101,6 @@ function disableChoiceButtons(bool){
 function updateModel(model, choice){
     model.classList.add(choice); 
     model.textContent = ""; 
-}
-
-
-
-
-//Old stuff below
-function game(){
-    let rounds = 0; 
-    let wins = 0; 
-
-    while (true){
-        let playerChoice = getPlayerChoice(); 
-        let computerChoice = getComputerChoice(); 
-        
-        while (playerChoice === ""){ 
-            alert("That's not an option! >:("); 
-            playerChoice = getPlayerChoice(); 
-        }
-        if (playerChoice === null){
-            alert(`Ending game. You won ${wins} out of ${rounds} rounds.`); 
-            break; 
-        }
-        rounds++; 
-        if (playRound(playerChoice, computerChoice)){
-            wins++; 
-        }
-    }
-}
-
-function playRound(playerChoice, computerChoice){
-    if (playerChoice === computerChoice){
-        alert(`${playerChoice} vs. ${computerChoice}. It's a tie!`);
-    } else {
-        let playerWon = determineWin(playerChoice, computerChoice); 
-        if (playerWon){
-            alert(`${playerChoice} beats ${computerChoice} - you won!`); 
-            return true; 
-        } else {
-            alert(`${playerChoice} loses to ${computerChoice}... you lost! :(`); 
-            return false; 
-        }
-    }
-}
-
-function getPlayerChoice(){
-    let input = prompt("What do you choose - rock, paper, or scissors?"); 
-    if (input === null)
-        return null; 
-    input = input.toUpperCase(); 
-    input = input.trim(); 
-    if (input === "ROCK" || input === "PAPER" || input === "SCISSORS"){
-        return input;
-    } else {
-        return ""; 
-    }
 }
 
 function getComputerChoice(){

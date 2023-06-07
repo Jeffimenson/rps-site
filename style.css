@@ -1,4 +1,103 @@
+/*Preliminaries */ 
+body {
+   height: 100vh; 
+   padding: 20px;
+   margin: 0;
+   box-sizing: border-box;
+
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
 button {
     padding: 0;
     margin: 0;
+    border: 0;
+}
+
+/* Top ui things */ 
+
+header {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+.stats{
+    text-align: center;
+}
+
+/* Choice stuff */ 
+
+.choices {
+    display: flex;
+    padding: 20px;
+    border-bottom: solid 2px black;
+    justify-content: center;
+    gap: 20px; 
+    width: 30%;
+
+    position: absolute; 
+    bottom: 30px;
+}
+
+.choices button {
+    width: 12em;
+    height: 6em;
+}
+
+.choices button:hover {
+    background-color: rgb(192, 191, 191);
+    background-blend-mode: multiply;
+}
+
+.choices button:active {
+    background-color: gray;
+    background-blend-mode: multiply;
+}
+
+/* Other stuff */ 
+
+.stats{
+    border: solid 2px black;
+    width: 6em;
+}
+
+.arena {
+    display: flex;
+    margin-top: 25vh;
+    width: 100%;
+    justify-content: center;
+    gap: 12%;
+    align-items: center;
+}
+
+.player, .enemy {
+   display: flex; 
+   flex-direction: column;
+   align-items: center;
+}
+
+.model {
+    width: 6em;
+    height: 6em;
+    /* border: solid 2px black; */
+    text-align: center;
+    margin: auto;
+    line-height: 6em; 
+    font-size: 2em;
+    background-size: cover;
+}
+
+.model.ROCK {
+    background-image: url(https://images.complex.com/complex/images/c_fill,dpr_auto,f_auto,q_auto,w_1400/fl_lossy,pg_1/kwitgomixcskkafwyixo/the-rock?fimg-ssr-default);
+    background-position: -50px 0;
+}
+
+.model.PAPER {
+    background-image: url(https://www.possupply.com/sca/mapped_images/2-1-4-x-150-thermal-roll-paper-50-rolls-case.0.jpg);
+}
+
+.model.SCISSORS {
+    background-image: url(https://www.artnews.com/wp-content/uploads/2021/01/AdobeStock_409447041.jpeg?w=1800);
+    background-position: -60px 0px;
 }

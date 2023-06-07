@@ -6,12 +6,17 @@ const winsTracker = document.querySelector('.wins');
 const lossesTracker = document.querySelector('.losses'); 
 const comparator = document.querySelector('.comparator'); 
 
+const overScreen = document.querySelector('.over-screen'); 
+const overText = document.querySelector('.over-screen p');
+const overButton = document.querySelector('.over-screen button');
+const dimmer = document.querySelector('.dimmer');
+
 let wins = 0; 
 let losses = 0; 
 
 for (let i = 0; i < choiceButtons.length; i++){
     choiceButtons[i].addEventListener('click', () => {
-        disableButtons(true); 
+        disableChoiceButtons(true); 
         const playerChoice = choiceButtons[i].getAttribute('data-choice');  
         updateModel(playerModel, playerChoice); 
         statusText.textContent = `You chose ${playerChoice}`;
@@ -30,12 +35,33 @@ for (let i = 0; i < choiceButtons.length; i++){
                    enemyModel.textContent = "?"; 
                    statusText.textContent = "Rock, Paper, or Scissors?"; 
                    comparator.textContent = "vs."; 
-                   disableButtons(false); 
+
+                   if (wins === 5 || losses === 5){
+                    activateGameOverScene();                   
+                   } else {
+                    disableChoiceButtons(false); 
+                   }
                 }, 1000)
             }, 800)
         }, 500)        
+
     })
 }
+
+function activateGameOverScene(){
+    overScreen.style.display = 'flex';
+    dimmer.style.display = 'block'; 
+    overText.textContent = (wins > losses) ? "You won! Play again?" : "You're a loser... Try again?"; 
+}
+
+overButton.addEventListener('click', () => {
+    overScreen.style.display = 'none'; 
+    dimmer.style.display = 'none'; 
+    disableChoiceButtons(false); 
+    wins = 0; 
+    losses = 0; 
+    updateStatsTracker(); 
+}); 
 
 function updateStatsTracker(){
     winsTracker.textContent = `Wins: ${wins}`; 
@@ -60,7 +86,7 @@ function updateStatsAndDisplayForWinner(playerChoice, enemyChoice){
     }
 }
 
-function disableButtons(bool){
+function disableChoiceButtons(bool){
     for (const button of choiceButtons){
         button.disabled = bool; 
     }

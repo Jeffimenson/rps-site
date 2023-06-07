@@ -5,17 +5,27 @@ body {
    margin: 0;
    box-sizing: border-box;
 
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   gap: 2em
+   
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;   
+    gap: 2em; 
 }
 button {
     padding: 0;
     margin: 0;
     border: 0;
 }
+button:hover {
+    background-color: rgb(192, 191, 191);
+}
 
+button:active {
+    background-color: gray;
+}
 /* Top ui things */ 
 
 header {
@@ -48,17 +58,7 @@ header {
     height: 6em;
 }
 
-.choices button:hover {
-    background-color: rgb(192, 191, 191);
-    background-blend-mode: multiply;
-}
-
-.choices button:active {
-    background-color: gray;
-    background-blend-mode: multiply;
-}
-
-/* Other stuff */ 
+/* Arena section */ 
 
 .stats{
     border: solid 2px black;
@@ -106,4 +106,42 @@ header {
 .model.SCISSORS {
     background-image: url(https://www.artnews.com/wp-content/uploads/2021/01/AdobeStock_409447041.jpeg?w=1800);
     background-position: -60px 0px;
+}
+
+/* game over screen */
+
+.over-screen {
+    width: 1000px;
+    height: 700px;
+    top: 0;
+    bottom: 0;
+    left: 0; 
+    right: 0; 
+    margin: auto;
+    background-color: dimgray;
+    color: white; 
+    position: absolute;
+    font-size: 2em;
+
+    display: none;
+    flex-direction: column; 
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.over-screen button {
+    width: 60px;
+    height: 40px;
+}
+
+.dimmer {
+    width: 100vw;
+    height: 100vh;
+    opacity: 0.3;
+    background-color: black;
+    position: absolute;
+    top: 0; 
+    left: 0; 
+
+    display: none;
 }

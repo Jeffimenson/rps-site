@@ -8,32 +8,42 @@
         <script src="program.js" defer></script>
     </head>
     <body>
-        <header>
-            <h1 class="status">Rock, Paper, or Scissors?</h1>
-            <div class="stats">
-                <p class="wins">Wins: 0</p>
-                <p class="losses">Losses: 0</p>
-            </div>
-        </header>
-        <section class="arena">
-            <div class="player">
-                <div class="model">
-                    ?
+        <main>
+            <header>
+                <h1 class="status">Rock, Paper, or Scissors?</h1>
+                <div class="stats">
+                    <p class="wins">Wins: 0</p>
+                    <p class="losses">Losses: 0</p>
                 </div>
-                <p>Your choice</p>
-            </div>
-            <p class="comparator">vs.</p>
-            <div class="enemy">
-                <div class="model">
-                    ?
+            </header>
+            <section class="arena">
+                <div class="player">
+                    <div class="model">
+                        ?
+                    </div>
+                    <p>Your choice</p>
                 </div>
-                <p>Enemy</p>
+                <p class="comparator">vs.</p>
+                <div class="enemy">
+                    <div class="model">
+                        ?
+                    </div>
+                    <p>Enemy</p>
+                </div>
+            </section>
+            
+            <div class="choices">
+                <button data-choice="ROCK">Rock</button>
+                <button data-choice="PAPER">Paper</button>
+                <button data-choice="SCISSORS">Scissors</button>
             </div>
-        </section>
-        <div class="choices">
-            <button data-choice="ROCK">Rock</button>
-            <button data-choice="PAPER">Paper</button>
-            <button data-choice="SCISSORS">Scissors</button>
+        </main>
+        <div class="dimmer">
+
+        </div>
+        <div class="over-screen">
+           <p>Game over. Play again?</p> 
+           <button>Sure</button>
         </div>
    </body>
 </html>

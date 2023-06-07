@@ -4,12 +4,14 @@ const playerModel = document.querySelector('.player .model');
 const enemyModel = document.querySelector('.enemy .model'); 
 const winsTracker = document.querySelector('.wins');
 const lossesTracker = document.querySelector('.losses'); 
+const comparator = document.querySelector('.comparator'); 
 
 let wins = 0; 
 let losses = 0; 
 
 for (let i = 0; i < choiceButtons.length; i++){
     choiceButtons[i].addEventListener('click', () => {
+        disableButtons(true); 
         const playerChoice = choiceButtons[i].getAttribute('data-choice');  
         updateModel(playerModel, playerChoice); 
         statusText.textContent = `You chose ${playerChoice}`;
@@ -19,12 +21,19 @@ for (let i = 0; i < choiceButtons.length; i++){
             updateModel(enemyModel, enemyChoice); 
             statusText.textContent = `Enemy chose ${enemyChoice}`; 
             setTimeout(() => {
-                updateForWinner(playerChoice, enemyChoice); 
+                updateStatsAndDisplayForWinner(playerChoice, enemyChoice); 
+                updateStatsTracker(); 
                 setTimeout(() => {
-                    
+                   playerModel.classList.remove(playerChoice); 
+                   playerModel.textContent = "?"; 
+                   enemyModel.classList.remove(enemyChoice); 
+                   enemyModel.textContent = "?"; 
+                   statusText.textContent = "Rock, Paper, or Scissors?"; 
+                   comparator.textContent = "vs."; 
+                   disableButtons(false); 
                 }, 1000)
-            }, 1000)
-        }, 1000)        
+            }, 800)
+        }, 500)        
     })
 }
 
@@ -33,21 +42,29 @@ function updateStatsTracker(){
     lossesTracker.textContent = `Losses: ${losses}`; 
 }
 
-function updateForWinner(playerChoice, enemyChoice){
+function updateStatsAndDisplayForWinner(playerChoice, enemyChoice){
     if(playerChoice===enemyChoice){
+        comparator.textContent = "="; 
         statusText.textContent = 'Its a tie :/'; 
     } else {
         const won = determineWin(playerChoice, enemyChoice); 
         if (won){
             statusText.textContent = `${playerChoice} beats ${enemyChoice} - you won! :D`; 
+            comparator.textContent = ">"; 
             wins++; 
         } else {
             statusText.textContent = `${playerChoice} loses to ${enemyChoice}... you lost :(`
+            comparator.textContent = "<"; 
             losses++; 
         }
     }
 }
 
+function disableButtons(bool){
+    for (const button of choiceButtons){
+        button.disabled = bool; 
+    }
+}
 
 function updateModel(model, choice){
     model.classList.add(choice); 
